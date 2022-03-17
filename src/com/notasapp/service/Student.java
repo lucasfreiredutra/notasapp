@@ -7,68 +7,74 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Student {
-    //Atributos do aluno
-
     private int studentId;
     private String studentFirstName;
     private String studentLastName;
-    private List<SchoolSubject> subjects = new ArrayList<>();
+    private List<SchoolSubject> subjectList = new ArrayList<>();
 
-
-    //Construtores do aluno
+//CONSTRUTORES
     public Student() {}
 
-    public Student (int id, String firstName, String lastName) {
-        this.studentId = id;
+    public Student(int studentId) {
+        this.studentId = studentId;
+    }
+
+    public Student (int studentId, String firstName, String lastName) {
+        this(studentId);
         this.studentFirstName = firstName;
         this.studentLastName = lastName;
     }
 
-    //Método para retornar a Id do aluno
+//MÉTODOS
+
     public int getStudentId() {
         return studentId;
     }
-    //Método para retornar o nome do aluno
+
+    public void setStudentId(int studentId) {
+        this.studentId = studentId;
+    }
+
+    public void setStudentFirstName(String studentFirstName) {
+        this.studentFirstName = studentFirstName;
+    }
+
+    public void setStudentLastName(String studentLastName) {
+        this.studentLastName = studentLastName;
+    }
+
     public String getName() {
-        return studentFirstName + studentLastName;
+        return studentFirstName + " " + studentLastName;
 
     }
 
-    //Método para inserir matéria e notas
-    public void studentSubject() {
-        //Cria scanner para pegar input do usuário
+    public void addSubject() {
         Scanner sc = new Scanner(System.in);
+        System.out.println("Matéria");
+        String subjectName = sc.nextLine();
+        subjectList.add(new SchoolSubject(studentId, subjectName));
+    }
 
-        //Input data da matéria
-        System.out.println("Inserir id do Aluno");
-        int studentId = sc.nextInt();
+    public void addGradesToSubject() {
+        System.out.println("Matéria");
+        Scanner reader = new Scanner(System.in);
+        String subjectName = reader.nextLine();
+        System.out.println("Prova 1");
+        double grade1 = reader.nextDouble();
+        System.out.println("Prova 2");
+        double grade2 = reader.nextDouble();
 
-        Scanner sc1 = new Scanner(System.in);
-        System.out.println("Inserir o nome da matéria?");
-        String subjectName = sc1.nextLine();
-        System.out.println("Inserir nota da prova 1");
-        double grade1 = sc.nextDouble();
-        System.out.println("Inserir nota da prova 2");
-        double grade2 = sc.nextDouble();
-
-        this.subjects.add(new SchoolSubject(studentId, subjectName,
-                grade1, grade2));
-
-
-
-        for (int i = 0; i < subjects.size(); i++) {
-            String name = subjects.get(i).getSubjectName();
-            if (name.equals(subjectName)) {
-                subjects.get(i).setAvrGrade();
-                double avrGrade = subjects.get(i).getAvrGrade();
+        for(int i = 0; i < subjectList.size(); i++) {
+            if(subjectName.equals(subjectList.get(i).getSubjectName())) {
+                subjectList.get(i).setGrade1(grade1);
+                subjectList.get(i).setGrade2(grade2);
+                subjectList.get(i).setAvrGrade();
 
                 Insert subject = new Insert();
-                subject.insertSubject(studentId, subjectName, grade1, grade2, avrGrade);
-
-                System.out.println("As notas do " + studentFirstName +
-                        " na matéria " + subjectName +
-                        " foram inseridas com sucesso");
+                subject.insertSubject(studentId,subjectList.get(i).getSubjectName(), subjectList.get(i).getGrade1(),
+                        subjectList.get(i).getGrade2(), subjectList.get(i).getAvrGrade());
             }
         }
     }
+
 }

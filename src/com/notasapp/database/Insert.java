@@ -5,10 +5,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-//Classe para adicionar aluno ao banco de dados
 public class Insert {
 
-    //Método para conectar com o banco de dados
+//Conecta com o banco de dados
     private Connection connect() {
 
         String url = "jdbc:sqlite:C:/Users/lucas/IdeaProjects/NotasApp/db/student.db";
@@ -22,7 +21,7 @@ public class Insert {
         return conn;
     }
 
-    //Método para inserir aluno ao banco de dados
+//Insere aluno ao banco de dados
     public void insertStudent(int studentId, String studentFirstName,
                               String studentLastName)  {
         String sql = "INSERT INTO students (student_id, student_firstname, student_lastname) VALUES(?, ?, ?)";
@@ -40,7 +39,7 @@ public class Insert {
         System.out.println("Os dados do aluno foram salvos.");
     }
 
-    //Método para inserir as notas do aluno no banco de dados
+//Insere as notas do aluno no banco de dados
     public void insertSubject(int studentId, String subjectName,
                               double grade1, double grade2, double avrgrade)  {
         String sql = "INSERT INTO subjects (student_id, subject_name, grade1, grade2, avr_grade) VALUES(?, ?, ?, ?, ?)";

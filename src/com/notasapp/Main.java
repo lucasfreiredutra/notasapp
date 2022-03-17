@@ -9,12 +9,18 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
+        programStart();
+
+    }
+
+//Começa o programa
+    public static void programStart() {
         Scanner scMain = new Scanner(System.in);
 
         printMessage("Bem vindo ao Notas app");
         printMessage("Escolha uma opção:" +
-                            "\n 1 - Inserir notas do aluno" +
-                            "\n 2 - Pesquisar notas do aluno");
+                "\n 1 - Inserir notas de um novo aluno" +
+                "\n 2 - Pesquisar notas do aluno");
         String answerMain = scMain.nextLine();
 
         if (answerMain.equals("1")) {
@@ -24,32 +30,36 @@ public class Main {
         } else {
             printMessage("Obrigado!");
         }
-
     }
 
-    //Método para adicionar as notas de um aluno
+//Cria aluno
     public static void newStudent() {
-        Scanner read = new Scanner(System.in);
+        printMessage("ID do aluno");
+        Scanner readerNewStudent = new Scanner(System.in);
+        int studentId = readerNewStudent.nextInt();
+        printMessage("Primeiro nome e Sobrenome");
+        Scanner scanner = new Scanner(System.in);
+        String studentName = scanner.nextLine();
+        String[] parts = studentName.split(" ");
 
-        System.out.println("Inserir Id do aluno");
-        int studentId = read.nextInt();
+        Student student = new Student(studentId, parts[0], parts[1]);
 
-        Scanner read1 = new Scanner(System.in);
+        Insert newStudent = new Insert();
+        newStudent.insertStudent(studentId, parts[0], parts[1]);
 
-        System.out.println("Inserir primeiro nome do aluno");
-        String studentFirstName = read1.nextLine();
-        System.out.println("Inserir sobrenome do aluno");
-        String studentLastName = read1.nextLine();
+        student.addSubject();
+        scanner.nextLine();
+        student.addGradesToSubject();
 
-        Insert students = new Insert();
-        students.insertStudent(studentId, studentFirstName, studentLastName);
-
-        Student student = new Student(studentId, studentFirstName,
-                studentLastName);
-        student.studentSubject();
     }
 
-    //Método para buscar as notas de um aluno em uma matéria
+//Adiciona matéria e notas a um aluno já existente no banco de dados
+    public static void addSubjectToStudent(); {
+
+    }
+
+
+//Busca notas do aluno em uma matéria
     public static void studentSearch() {
         Scanner read1 = new Scanner(System.in);
 
@@ -60,7 +70,7 @@ public class Main {
         student.studentSearch(studentName);
     }
 
-    //Método para imprimir mensagens no prompt
+//Imprime mensagens no prompt
     public static void printMessage(String text) {
         System.out.println(text);
     }

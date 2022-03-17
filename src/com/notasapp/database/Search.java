@@ -4,6 +4,7 @@ import java.sql.*;
 
 public class Search {
 
+//Conecta com o banco de dados
         private Connection connect() {
 
             String url = "jdbc:sqlite:C:/Users/lucas/IdeaProjects/NotasApp/db/student.db";
@@ -15,7 +16,8 @@ public class Search {
             }
             return conn;
         }
-        //Método para buscar as notas de um aluno em uma matéria
+
+//Busca notas do aluno em uma matéria
         public void studentSearch(String nome) {
 
             String sql = "SELECT student_firstname, student_lastname ,subject_name, grade1, grade2, avr_grade" +
