@@ -1,5 +1,7 @@
 package com.notasapp.database;
 
+import com.notasapp.service.Student;
+
 import java.sql.*;
 
 public class Search {
@@ -21,9 +23,9 @@ public class Search {
         public void studentSearch(String nome) {
 
             String sql = "SELECT student_firstname, student_lastname ,subject_name, grade1, grade2, avr_grade" +
-            " FROM students" +
-            " INNER JOIN subjects" +
-            " ON subjects.student_id = students.student_id" +
+            " FROM student" +
+            " INNER JOIN subject" +
+            " ON subject.student_id = student.student_id" +
             " WHERE student_firstname = ?";
 
             try (Connection conn = this.connect();
@@ -40,6 +42,29 @@ public class Search {
                             "Nota 1: " + rs.getDouble("grade1") + "\n" +
                             "Nota 2: " + rs.getDouble("grade2") + "\n" +
                             "Média: " + rs.getDouble("avr_grade") + "\n");
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+//Quantas matérias o aluno está matriculado
+        public void whatSubject(int studentId) {
+            String sql = "SELECT student_id, subject_name, avr_grade FROM subject WHERE subject.student_id = ?";
+
+
+            try (Connection conn = this.connect();
+                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+                pstmt.setInt(1, studentId);
+
+                ResultSet rs = pstmt.executeQuery();
+
+                while (rs.next()) {
+                    System.out.println("Aluno ID: " + rs.getInt("student_id") +  "\n" +
+                            "Matéria: "  + rs.getString("subject_name") + "\n" +
+                            "Média: " + rs.getDouble("avr_grade"));
+                    System.out.println();
                 }
             } catch (SQLException e) {
                 System.out.println(e.getMessage());

@@ -24,7 +24,7 @@ public class Insert {
 //Insere aluno ao banco de dados
     public void insertStudent(int studentId, String studentFirstName,
                               String studentLastName)  {
-        String sql = "INSERT INTO students (student_id, student_firstname, student_lastname) VALUES(?, ?, ?)";
+        String sql = "INSERT INTO student (student_id, student_firstname, student_lastname) VALUES(?, ?, ?)";
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -42,7 +42,7 @@ public class Insert {
 //Insere as notas do aluno no banco de dados
     public void insertSubject(int studentId, String subjectName,
                               double grade1, double grade2, double avrgrade)  {
-        String sql = "INSERT INTO subjects (student_id, subject_name, grade1, grade2, avr_grade) VALUES(?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO subject (student_id, subject_name, grade1, grade2, avr_grade) VALUES(?, ?, ?, ?, ?)";
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {

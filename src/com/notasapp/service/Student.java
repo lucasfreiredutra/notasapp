@@ -19,11 +19,12 @@ public class Student {
         this.studentId = studentId;
     }
 
-    public Student (int studentId, String firstName, String lastName) {
+    public Student(int studentId, String firstName, String lastName) {
         this(studentId);
         this.studentFirstName = firstName;
         this.studentLastName = lastName;
     }
+
 
 //MÉTODOS
 
@@ -49,6 +50,7 @@ public class Student {
     }
 
     public void addSubject() {
+        System.out.println("Matriculando o aluno em uma matéria");
         Scanner sc = new Scanner(System.in);
         System.out.println("Matéria");
         String subjectName = sc.nextLine();
@@ -56,8 +58,9 @@ public class Student {
     }
 
     public void addGradesToSubject() {
-        System.out.println("Matéria");
+        System.out.println("Inserindo as notas no banco de dados");
         Scanner reader = new Scanner(System.in);
+        System.out.println("Matéria");
         String subjectName = reader.nextLine();
         System.out.println("Prova 1");
         double grade1 = reader.nextDouble();
@@ -76,5 +79,6 @@ public class Student {
             }
         }
     }
+
 
 }
